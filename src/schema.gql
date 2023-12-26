@@ -1,0 +1,69 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Todo {
+  id: Int!
+  description: String!
+  done: Boolean!
+}
+
+"""Agregación de tareas"""
+type AggregationType {
+  total: Int!
+  pending: Int!
+  completed: Int!
+  totalTodosCompleted: Int! @deprecated(reason: "Most use completed instead")
+}
+
+type Query {
+  """Saluda al mundo es lo que retorna"""
+  hello: String!
+  randomNumber: Float!
+
+  """from zero to arguments to"""
+  randomFromZeroTo(to: Int): Int!
+
+  """Listado de tareas"""
+  todos(status: Boolean): [Todo!]!
+
+  """Una tarea"""
+  todo(id: Int!): Todo!
+
+  """Total de tareas"""
+  totalTodos: Int!
+
+  """Total de tareas completadas"""
+  completedTodos: Int!
+
+  """Total de tareas pendientes"""
+  pendingTodos: Int!
+  aggregation: AggregationType!
+}
+
+type Mutation {
+  """Crear una tarea"""
+  createTodo(createTodoInput: CreateTodoInput!): Todo!
+
+  """Actualizar una tarea"""
+  updateTodo(updateTodoInput: UpdateTodoInput!): Todo!
+
+  """Eliminar una tarea"""
+  removeTodo(id: Int!): Boolean!
+}
+
+input CreateTodoInput {
+  """Descripción de la tarea"""
+  description: String!
+}
+
+input UpdateTodoInput {
+  """Id de la tarea"""
+  id: Int!
+
+  """Descripción de la tarea"""
+  description: String
+
+  """Estado de la tarea"""
+  done: Boolean
+}
